@@ -201,47 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const typingText = document.querySelector('.typing-text');
-    const words = [
-        'Cybersecurity Intern & Software Developer',
-        'Building Secure Digital Solutions',
-        'Creating Interactive Experiences'
-    ];
-    let wordIndex = 0;
-    let charIndex = 0;
-
-    // Dynamically set the width of the typing-text element
-    function adjustWidth() {
-        const longestWord = words.reduce((a, b) => (a.length > b.length ? a : b));
-        typingText.style.width = `${longestWord.length + 2}ch`; // Add extra space for the cursor
-    }
-
-    function type() {
-        if (charIndex < words[wordIndex].length) {
-            typingText.textContent += words[wordIndex].charAt(charIndex);
-            charIndex++;
-            setTimeout(type, 100); // Typing speed
-        } else {
-            setTimeout(erase, 2000); // Pause before erasing
-        }
-    }
-
-    function erase() {
-        if (charIndex > 0) {
-            typingText.textContent = words[wordIndex].substring(0, charIndex - 1);
-            charIndex--;
-            setTimeout(erase, 50); // Erasing speed
-        } else {
-            wordIndex = (wordIndex + 1) % words.length; // Move to the next word
-            setTimeout(type, 500); // Pause before typing the next word
-        }
-    }
-
-    adjustWidth(); // Adjust the width before starting the animation
-    type(); // Start the typing effect
-});
-
-document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
 
@@ -260,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Typing effect configurations
+// Typing Effect Configuration
 const typingConfig = {
     intro: {
         text: "Welcome to My Portfolio",
@@ -274,11 +233,11 @@ const typingConfig = {
     }
 };
 
-let introIndex = 0;
-let nameIndex = 0;
-
-// Unified typing effect function
+// Remove any existing typing effect related code/functions
+// and replace with this unified implementation
 function typeEffect(config, index, callback) {
+    if (!config.element) return; // Guard clause for missing elements
+    
     const { text, element, speed } = config;
     
     if (index < text.length) {
@@ -289,8 +248,12 @@ function typeEffect(config, index, callback) {
     }
 }
 
-// Start typing effects
-window.addEventListener('DOMContentLoaded', () => {
+// Initialize Typing Effects
+document.addEventListener('DOMContentLoaded', () => {
+    // Remove any existing content
+    if (typingConfig.intro.element) typingConfig.intro.element.textContent = '';
+    if (typingConfig.name.element) typingConfig.name.element.textContent = '';
+
     // Start intro typing
     typeEffect(typingConfig.intro, 0, () => {
         // Start name typing after intro completes
