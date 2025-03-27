@@ -8,6 +8,8 @@ const nextButton = document.querySelector('.carousel-button.next');
 const dotsContainer = document.querySelector('.carousel-dots');
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const navLinks = document.querySelector('.nav-links');
+const typingIntro = document.querySelector('.typing-intro');
+const typingText = document.querySelector('.typing-text');
 
 // Add mobile detection
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -219,55 +221,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Typing Effect Configuration
-const typingConfig = {
-    intro: {
-        text: "Welcome to My Portfolio",
-        element: document.querySelector('.typing-intro'),
-        speed: isMobile ? 150 : 100
-    },
-    name: {
-        text: "Stavin Fernandes",
-        element: document.querySelector('.typing-text'),
-        speed: isMobile ? 150 : 100
-    }
+// Text Configuration
+const texts = {
+    intro: "Welcome to My Portfolio",
+    name: "Stavin Fernandes"
 };
 
-// Remove any existing typing effect related code/functions
-// and replace with this unified implementation
-function typeEffect(config, index, callback) {
-    if (!config.element) return; // Guard clause for missing elements
+// Typing Effect Function
+function typeText(element, text, delay = 100) {
+    if (!element) return;
     
-    const { text, element, speed } = config;
+    let index = 0;
+    element.textContent = ''; // Clear existing text
     
-    if (index < text.length) {
-        element.textContent += text.charAt(index);
-        setTimeout(() => typeEffect(config, index + 1, callback), speed);
-    } else if (callback) {
-        callback();
+    function type() {
+        if (index < text.length) {
+            element.textContent += text[index];
+            index++;
+            setTimeout(type, delay);
+        }
     }
+    
+    type();
 }
 
 // Initialize Typing Effects
 document.addEventListener('DOMContentLoaded', () => {
-    // Remove any existing content
-    if (typingConfig.intro.element) typingConfig.intro.element.textContent = '';
-    if (typingConfig.name.element) typingConfig.name.element.textContent = '';
-
     // Start intro typing
-    typeEffect(typingConfig.intro, 0, () => {
-        // Start name typing after intro completes
-        setTimeout(() => {
-            typeEffect(typingConfig.name, 0);
-        }, 1000);
-    });
+    typeText(typingIntro, texts.intro, 100);
+    
+    // Start name typing after intro
+    setTimeout(() => {
+        typeText(typingText, texts.name, 150);
+    }, 2000);
 });
 
 // Mobile Menu Toggle
-mobileMenuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    mobileMenuToggle.classList.toggle('active');
-});
+if (mobileMenuToggle && navLinks) {
+    mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+}
 
 // Touch Events
 let xDown = null;
