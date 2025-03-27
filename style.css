@@ -1,0 +1,525 @@
+/* Unified Light Mode Variables */
+:root {
+    --color-primary: #3454D1;    /* Byzantine blue */
+    --color-secondary: #34D1BF;  /* Turquoise */
+    --color-accent: #D1345B;     /* Cerise */
+    --color-background: #EFEFEF; /* Anti-flash white */
+    --color-text: #070707;       /* Black */
+    --color-heading: #1d3557;    /* Deep Blue */
+    --color-card-bg: #ffffff;    /* White Card Background */
+    --color-card-shadow: rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+    --transition: all 0.3s ease-in-out;
+    --animation-duration: 0.8s;
+    --animation-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --font-primary: 'Inter', sans-serif;
+    --font-secondary: 'Poppins', sans-serif;
+}
+
+/* Dark Mode Variables */
+.dark-mode {
+    --color-primary: #1d3557;    /* Deep Blue */
+    --color-secondary: #457b9d;  /* Muted Blue */
+    --color-accent: #a8dadc;     /* Light Cyan */
+    --color-background: #1a202c; /* Dark Background */
+    --color-text: #e2e8f0;       /* Light Gray Text */
+    --color-heading: #f4f4f9;    /* Light Heading */
+    --color-card-bg: #7e7f80;    /* Dark Card Background */
+    --color-card-shadow: rgba(0, 0, 0, 0.5); /* Darker Shadow */
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: var(--color-card-bg);
+    box-shadow: 0 2px 4px var(--color-card-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 15px 20px;
+    animation: fadeInDown var(--animation-duration) var(--animation-ease);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--color-text);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    font-family: var(--font-secondary);
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--color-primary);
+}
+
+/* Theme Toggle Switch */
+.theme-toggle-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 20px;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-card-bg);
+    border: 2px solid var(--color-card-shadow);
+    border-radius: 25px;
+    transition: var(--transition);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 19px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+input:checked + .slider {
+    background-color: var(--color-primary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(25px);
+    background-color: var(--color-accent);
+}
+
+/* Full-Screen Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh; /* Full-screen height */
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: var(--color-text);
+    animation: fadeIn var(--animation-duration) var(--animation-ease);
+}
+
+.hero h1 {
+    font-size: 3rem; /* Adjust font size for better responsiveness */
+    font-family: var(--font-secondary);
+    margin-bottom: 20px;
+    overflow: hidden; /* Prevent text overflow */
+    text-align: center;
+}
+
+.typing-text {
+    display: inline-block;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    max-width: 90%; /* Constrain the width to 90% of the container */
+    text-align: center; /* Center the text */
+    animation: typing 4s steps(30, end); /* Only the typing animation */
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%; /* Ensure it grows to fit the container */
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeInUp var(--animation-duration) var(--animation-ease) 1s forwards;
+}
+
+.hero .primary-btn,
+.hero .secondary-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: var(--font-secondary);
+    transition: var(--transition);
+    opacity: 0;
+    animation: fadeInUp var(--animation-duration) var(--animation-ease) 1.5s forwards;
+}
+
+.hero .primary-btn {
+    background-color: var(--color-card-bg);
+    color: var(--color-primary);
+    box-shadow: 0 4px 6px var(--color-card-shadow);
+}
+
+.hero .secondary-btn {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 2px solid var(--color-text);
+}
+
+.hero .primary-btn:hover {
+    background-color: var(--color-accent);
+    color: var(--color-background);
+}
+
+.hero .secondary-btn:hover {
+    background-color: var(--color-text);
+    color: var(--color-background);
+}
+
+/* Typing Intro Effect */
+.hero-intro {
+    margin-bottom: 20px; /* Add spacing between the intro and the main text */
+    text-align: center;
+}
+
+.typing-intro {
+    font-size: 1.5rem; /* Adjust font size */
+    font-family: var(--font-secondary);
+    color: var(--color-primary);
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    animation: typing-intro 3s steps(30, end);
+}
+
+/* Typing Animation for Intro */
+@keyframes typing-intro {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+/* Blinking Caret for Intro */
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: var(--color-primary);
+    }
+}
+
+/* Work Section (Carousel) */
+.work {
+    padding: 50px 20px;
+    background-color: var(--color-background);
+    animation: fadeIn var(--animation-duration) var(--animation-ease);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: slideUp var(--animation-duration) var(--animation-ease);
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-family: var(--font-secondary);
+    color: var(--color-heading);
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px var(--color-card-shadow);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.work-card {
+    flex: 0 0 33.33%;
+    padding: 20px;
+    box-shadow: 0 4px 6px var(--color-card-shadow);
+    background-color: var(--color-card-bg);
+    margin: 10px;
+    border-radius: 10px;
+    transition: var(--transition);
+    animation: fadeInUp var(--animation-duration) var(--animation-ease);
+}
+
+.work-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 10px var(--color-card-shadow);
+}
+
+.work-category {
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.work-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--color-heading);
+}
+
+.work-card p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    color: var(--color-text);
+}
+
+.tech-stack span {
+    display: inline-block;
+    background-color: var(--color-secondary);
+    color: #fff;
+    padding: 5px 10px;
+    margin: 5px 5px 0 0;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+/* Carousel Dots */
+.carousel-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.carousel-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.carousel-dot.active {
+    background-color: var(--color-primary);
+}
+
+/* About Section */
+.about {
+    padding: 50px 20px;
+    background-color: var(--color-card-bg);
+    animation: fadeIn var(--animation-duration) var(--animation-ease);
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.about h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: var(--font-secondary);
+    color: var(--color-heading);
+    margin-bottom: 20px;
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.expertise {
+    padding: 20px;
+    background-color: var(--color-background);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px var(--color-card-shadow);
+    transition: var(--transition);
+    animation: fadeInUp var(--animation-duration) var(--animation-ease);
+}
+
+.expertise:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 10px var(--color-card-shadow);
+}
+
+/* Grid-Based Layout */
+.grid-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 50px 20px;
+    animation: fadeIn var(--animation-duration) var(--animation-ease);
+}
+
+.grid-item {
+    background-color: var(--color-card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px var(--color-card-shadow);
+    padding: 20px;
+    transition: var(--transition);
+    animation: fadeInUp var(--animation-duration) var(--animation-ease);
+    color: var(--color-text);
+}
+
+.grid-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 10px var(--color-card-shadow);
+}
+
+.grid-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--color-heading);
+}
+
+.grid-item p {
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+/* Contact Section */
+.contact {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: var(--color-background);
+    animation: fadeIn var(--animation-duration) var(--animation-ease);
+    color: var(--color-text);
+}
+
+.contact h2 {
+    font-size: 2.5rem;
+    font-family: var(--font-secondary);
+    color: var(--color-heading);
+    margin-bottom: 20px;
+}
+
+.contact-link {
+    display: block;
+    color: var(--color-primary);
+    text-decoration: none;
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+.contact-link:hover {
+    color: var(--color-accent);
+}
+
+.social-links a {
+    color: var(--color-text);
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1.5rem;
+}
+
+.social-links a:hover {
+    color: var(--color-primary);
+}
+
+/* Example usage */
+button {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
+
+a {
+  color: var(--color-accent);
+}
+
+.card {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
