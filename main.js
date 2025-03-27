@@ -9,6 +9,14 @@ const dotsContainer = document.querySelector('.carousel-dots');
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
+// Add mobile detection
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+// Adjust typing speed for mobile
+const mobileTypingSpeed = 150;
+const desktopTypingSpeed = 100;
+const typingSpeed = isMobile ? mobileTypingSpeed : desktopTypingSpeed;
+
 // Utility Functions
 const debounce = (func, wait) => {
     let timeout;
@@ -261,7 +269,7 @@ function typeIntroEffect() {
     if (introIndex < introText.length) {
         typingIntro.textContent += introText.charAt(introIndex); // Add one character at a time
         introIndex++;
-        setTimeout(typeIntroEffect, 100); // Adjust typing speed (100ms per character)
+        setTimeout(typeIntroEffect, typingSpeed); // Adjust typing speed
     }
 }
 
@@ -269,7 +277,7 @@ function typeNameEffect() {
     if (nameIndex < nameToType.length) {
         typingText.textContent += nameToType.charAt(nameIndex); // Add one character at a time
         nameIndex++;
-        setTimeout(typeNameEffect, 150); // Adjust typing speed (150ms per character)
+        setTimeout(typeNameEffect, typingSpeed); // Adjust typing speed
     }
 }
 
@@ -295,7 +303,7 @@ function typeIntroEffect() {
     if (introIndex < introText.length) {
         typingIntro.textContent += introText.charAt(introIndex);
         introIndex++;
-        setTimeout(typeIntroEffect, 100);
+        setTimeout(typeIntroEffect, typingSpeed);
     }
 }
 
@@ -303,7 +311,7 @@ function typeNameEffect() {
     if (nameIndex < nameText.length) {
         typingText.textContent += nameText.charAt(nameIndex);
         nameIndex++;
-        setTimeout(typeNameEffect, 150);
+        setTimeout(typeNameEffect, typingSpeed);
     }
 }
 
@@ -320,25 +328,36 @@ let yDown = null;
 document.addEventListener('touchstart', handleTouchStart, false);
 document.addEventListener('touchmove', handleTouchMove, false);
 
+// Optimize touch events for mobile
+let touchStartTime;
+const SWIPE_THRESHOLD = 50;
+const SWIPE_TIMEOUT = 300;
+
 function handleTouchStart(evt) {
+    touchStartTime = Date.now();
     xDown = evt.touches[0].clientX;
     yDown = evt.touches[0].clientY;
 }
 
 function handleTouchMove(evt) {
     if (!xDown || !yDown) return;
+    
+    // Check if swipe is within timeout
+    if (Date.now() - touchStartTime > SWIPE_TIMEOUT) {
+        xDown = null;
+        yDown = null;
+        return;
+    }
 
     const xUp = evt.touches[0].clientX;
     const yUp = evt.touches[0].clientY;
     const xDiff = xDown - xUp;
     const yDiff = yDown - yUp;
 
-    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+    if (Math.abs(xDiff) > Math.abs(yDiff) && Math.abs(xDiff) > SWIPE_THRESHOLD) {
         if (xDiff > 0) {
-            // Swipe left action
             navLinks.classList.remove('active');
         } else {
-            // Swipe right action
             navLinks.classList.add('active');
         }
     }
