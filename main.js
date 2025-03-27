@@ -260,65 +260,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Typing effect for the intro text
-const typingIntro = document.querySelector('.typing-intro');
-// Removed duplicate declaration of introText
-// Removed duplicate declaration of introIndex
+// Typing effect configurations
+const typingConfig = {
+    intro: {
+        text: "Welcome to My Portfolio",
+        element: document.querySelector('.typing-intro'),
+        speed: isMobile ? 150 : 100
+    },
+    name: {
+        text: "Stavin Fernandes",
+        element: document.querySelector('.typing-text'),
+        speed: isMobile ? 150 : 100
+    }
+};
 
-function typeIntroEffect() {
-    if (introIndex < introText.length) {
-        typingIntro.textContent += introText.charAt(introIndex); // Add one character at a time
-        introIndex++;
-        setTimeout(typeIntroEffect, typingSpeed); // Adjust typing speed
+let introIndex = 0;
+let nameIndex = 0;
+
+// Unified typing effect function
+function typeEffect(config, index, callback) {
+    const { text, element, speed } = config;
+    
+    if (index < text.length) {
+        element.textContent += text.charAt(index);
+        setTimeout(() => typeEffect(config, index + 1, callback), speed);
+    } else if (callback) {
+        callback();
     }
 }
 
-function typeNameEffect() {
-    if (nameIndex < nameToType.length) {
-        typingText.textContent += nameToType.charAt(nameIndex); // Add one character at a time
-        nameIndex++;
-        setTimeout(typeNameEffect, typingSpeed); // Adjust typing speed
-    }
-}
-
-// Start both typing effects when the page loads
+// Start typing effects
 window.addEventListener('DOMContentLoaded', () => {
-    typeIntroEffect(); // Start the intro typing effect
-    setTimeout(typeNameEffect, 3000); // Delay the name typing effect to start after the intro
+    // Start intro typing
+    typeEffect(typingConfig.intro, 0, () => {
+        // Start name typing after intro completes
+        setTimeout(() => {
+            typeEffect(typingConfig.name, 0);
+        }, 1000);
+    });
 });
 
 // Mobile Menu Toggle
 mobileMenuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     mobileMenuToggle.classList.toggle('active');
-});
-
-// Typing Effects
-const typingText = document.querySelector('.typing-text');
-const nameText = "Stavin Fernandes";
-let introIndex = 0;
-let nameIndex = 0;
-
-function typeIntroEffect() {
-    if (introIndex < introText.length) {
-        typingIntro.textContent += introText.charAt(introIndex);
-        introIndex++;
-        setTimeout(typeIntroEffect, typingSpeed);
-    }
-}
-
-function typeNameEffect() {
-    if (nameIndex < nameText.length) {
-        typingText.textContent += nameText.charAt(nameIndex);
-        nameIndex++;
-        setTimeout(typeNameEffect, typingSpeed);
-    }
-}
-
-// Start typing effects
-window.addEventListener('DOMContentLoaded', () => {
-    typeIntroEffect();
-    setTimeout(typeNameEffect, 2000);
 });
 
 // Touch Events
