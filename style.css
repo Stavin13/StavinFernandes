@@ -347,6 +347,8 @@ input:checked + .slider:before {
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 6px var(--color-card-shadow);
+    margin: 0 auto;
+    max-width: 1200px;
 }
 
 .carousel-track {
@@ -355,7 +357,7 @@ input:checked + .slider:before {
 }
 
 .work-card {
-    flex: 0 0 33.33%;
+    flex: 0 0 100%; /* Show one card at a time on mobile */
     padding: 20px;
     box-shadow: 0 4px 6px var(--color-card-shadow);
     background-color: var(--color-card-bg);
@@ -403,21 +405,25 @@ input:checked + .slider:before {
 .carousel-dots {
     text-align: center;
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .carousel-dot {
-    display: inline-block;
     width: 12px;
     height: 12px;
     background-color: var(--color-secondary);
+    border: none;
     border-radius: 50%;
-    margin: 0 5px;
+    padding: 0;
     cursor: pointer;
     transition: var(--transition);
 }
 
 .carousel-dot.active {
     background-color: var(--color-primary);
+    transform: scale(1.2);
 }
 
 /* About Section */
@@ -472,7 +478,7 @@ input:checked + .slider:before {
     box-shadow: 0 4px 6px var(--color-card-shadow);
     padding: 20px;
     transition: var(--transition);
-    animation: fadeInUp var(--animation-duration) var(--animation-ease);
+    animation: fadeInUp var(--animation-duration) var (--animation-ease);
     color: var(--color-text);
 }
 
@@ -647,5 +653,9 @@ a {
 
     .typing-text {
         font-size: 3rem;
+    }
+
+    .work-card {
+        flex: 0 0 33.33%; /* Show three cards on desktop */
     }
 }

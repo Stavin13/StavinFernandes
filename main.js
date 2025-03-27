@@ -365,3 +365,37 @@ function handleTouchMove(evt) {
     xDown = null;
     yDown = null;
 }
+
+// Carousel Configuration
+const carouselDots = document.querySelector('.carousel-dots');
+const slides = document.querySelectorAll('.work-card');
+const slideCount = slides.length;
+
+// Create dots based on actual number of work cards
+function createCarouselDots() {
+    carouselDots.innerHTML = ''; // Clear existing dots
+    for (let i = 0; i < slideCount; i++) {
+        const dot = document.createElement('button');
+        dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+        dot.setAttribute('aria-label', `Slide ${i + 1}`);
+        dot.addEventListener('click', () => goToSlide(i));
+        carouselDots.appendChild(dot);
+    }
+}
+
+// Update active dot
+function updateDots(currentIndex) {
+    document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+    });
+}
+
+// Go to specific slide
+function goToSlide(index) {
+    const slideWidth = slides[0].offsetWidth;
+    carouselTrack.style.transform = `translateX(-${slideWidth * index}px)`;
+    updateDots(index);
+}
+
+// Initialize carousel
+createCarouselDots();
