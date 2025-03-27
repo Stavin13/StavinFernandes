@@ -5,7 +5,7 @@
     --color-accent: #D1345B;     /* Cerise */
     --color-background: #EFEFEF; /* Anti-flash white */
     --color-text: #070707;       /* Black */
-    --color-heading: #1d3557;    /* Deep Blue */
+    --color-heading: #ffffff;    /* Deep Blue */
     --color-card-bg: #ffffff;    /* White Card Background */
     --color-card-shadow: rgba(0, 0, 0, 0.1); /* Subtle Shadow */
     --transition: all 0.3s ease-in-out;
@@ -41,6 +41,7 @@ body {
     line-height: 1.6;
     margin: 0;
     overflow-x: hidden;
+    width: 100%;
 }
 
 .wrapper {
@@ -64,6 +65,48 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 15px;
+}
+
+.nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.mobile-menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text);
+    margin: 5px 0;
+    transition: var(--transition);
+}
+
+.nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 0;
+}
+
+.nav-links.active {
+    display: flex;
 }
 
 .nav-links a {
@@ -145,6 +188,11 @@ input:checked + .slider:before {
     animation: fadeIn var(--animation-duration) var(--animation-ease);
 }
 
+.hero-content {
+    padding: 20px;
+    text-align: center;
+}
+
 .hero h1 {
     font-size: 3rem; /* Adjust font size for better responsiveness */
     font-family: var(--font-secondary);
@@ -160,6 +208,8 @@ input:checked + .slider:before {
     max-width: 90%; /* Constrain the width to 90% of the container */
     text-align: center; /* Center the text */
     animation: typing 4s steps(30, end); /* Only the typing animation */
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 @keyframes typing {
@@ -228,7 +278,7 @@ input:checked + .slider:before {
 }
 
 .typing-intro {
-    font-size: 1.5rem; /* Adjust font size */
+    font-size: 1.2rem; /* Adjust font size */
     font-family: var(--font-secondary);
     color: var(--color-primary);
     font-weight: bold;
@@ -236,6 +286,7 @@ input:checked + .slider:before {
     overflow: hidden;
     display: inline-block;
     animation: typing-intro 3s steps(30, end);
+    margin-bottom: 20px;
 }
 
 /* Typing Animation for Intro */
@@ -412,57 +463,6 @@ input:checked + .slider:before {
 }
 
 .grid-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 10px var(--color-card-shadow);
-}
-
-.grid-item h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: var(--color-heading);
-}
-
-.grid-item p {
-    font-size: 1rem;
-    color: var(--color-text);
-}
-
-/* Contact Section */
-.contact {
-    padding: 50px 20px;
-    text-align: center;
-    background-color: var(--color-background);
-    animation: fadeIn var(--animation-duration) var(--animation-ease);
-    color: var(--color-text);
-}
-
-.contact h2 {
-    font-size: 2.5rem;
-    font-family: var(--font-secondary);
-    color: var(--color-heading);
-    margin-bottom: 20px;
-}
-
-.contact-link {
-    display: block;
-    color: var(--color-primary);
-    text-decoration: none;
-    margin: 10px 0;
-    font-size: 1rem;
-}
-
-.contact-link:hover {
-    color: var(--color-accent);
-}
-
-.social-links a {
-    color: var(--color-text);
-    text-decoration: none;
-    margin: 0 10px;
-    font-size: 1.5rem;
-}
-
-.social-links a:hover {
     color: var(--color-primary);
 }
 
@@ -521,5 +521,33 @@ a {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 768px) {
+    .mobile-menu-toggle {
+        display: none;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    .typing-intro {
+        font-size: 1.5rem;
+    }
+
+    .typing-text {
+        font-size: 3rem;
     }
 }

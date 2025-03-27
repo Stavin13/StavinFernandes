@@ -6,6 +6,8 @@ const carouselTrack = document.querySelector('.carousel-track');
 const prevButton = document.querySelector('.carousel-button.prev');
 const nextButton = document.querySelector('.carousel-button.next');
 const dotsContainer = document.querySelector('.carousel-dots');
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const navLinks = document.querySelector('.nav-links');
 
 // Utility Functions
 const debounce = (func, wait) => {
@@ -252,8 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Typing effect for the intro text
 const typingIntro = document.querySelector('.typing-intro');
-const introText = "Stavin Fernandes"; // Text for the intro
-let introIndex = 0;
+// Removed duplicate declaration of introText
+// Removed duplicate declaration of introIndex
 
 function typeIntroEffect() {
     if (introIndex < introText.length) {
@@ -276,3 +278,71 @@ window.addEventListener('DOMContentLoaded', () => {
     typeIntroEffect(); // Start the intro typing effect
     setTimeout(typeNameEffect, 3000); // Delay the name typing effect to start after the intro
 });
+
+// Mobile Menu Toggle
+mobileMenuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    mobileMenuToggle.classList.toggle('active');
+});
+
+// Typing Effects
+const typingText = document.querySelector('.typing-text');
+const nameText = "Stavin Fernandes";
+let introIndex = 0;
+let nameIndex = 0;
+
+function typeIntroEffect() {
+    if (introIndex < introText.length) {
+        typingIntro.textContent += introText.charAt(introIndex);
+        introIndex++;
+        setTimeout(typeIntroEffect, 100);
+    }
+}
+
+function typeNameEffect() {
+    if (nameIndex < nameText.length) {
+        typingText.textContent += nameText.charAt(nameIndex);
+        nameIndex++;
+        setTimeout(typeNameEffect, 150);
+    }
+}
+
+// Start typing effects
+window.addEventListener('DOMContentLoaded', () => {
+    typeIntroEffect();
+    setTimeout(typeNameEffect, 2000);
+});
+
+// Touch Events
+let xDown = null;
+let yDown = null;
+
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+
+function handleTouchStart(evt) {
+    xDown = evt.touches[0].clientX;
+    yDown = evt.touches[0].clientY;
+}
+
+function handleTouchMove(evt) {
+    if (!xDown || !yDown) return;
+
+    const xUp = evt.touches[0].clientX;
+    const yUp = evt.touches[0].clientY;
+    const xDiff = xDown - xUp;
+    const yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0) {
+            // Swipe left action
+            navLinks.classList.remove('active');
+        } else {
+            // Swipe right action
+            navLinks.classList.add('active');
+        }
+    }
+
+    xDown = null;
+    yDown = null;
+}
