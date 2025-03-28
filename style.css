@@ -811,7 +811,7 @@ p {
     white-space: nowrap;
     display: flex;
     align-items: center;
-    height: 80px;
+    height: 60px; /* Reduced height */
     position: relative;
     width: 100%;
 }
@@ -824,23 +824,23 @@ p {
     font-weight: bold;
     color: #FCF300; /* Fixed color value instead of var() */
     text-transform: uppercase;
-    gap: 50px;
+    gap: 30px; /* Reduced gap between items */
     will-change: transform;
     min-width: 100%;
 }
 
 .marquee-content span {
     display: inline-block;
-    padding: 0 20px;
+    padding: 0 10px; /* Reduced padding */
 }
 
 /* Add a sparkle or separator between words */
 .marquee-content span::after {
     content: "✦";
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px; /* Reduced margin */
+    margin-right: 10px; /* Reduced margin */
     color: var(--color-secondary);
-    font-size: 1.2rem;
+    font-size: 1rem; /* Slightly smaller separator */
 }
 
 /* Marquee Animation */
