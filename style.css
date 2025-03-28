@@ -763,7 +763,7 @@ p {
     padding: 12px 24px;
     border-radius: 8px;
     background-color: var(--color-card-bg);
-    color: var(--color-primary);
+    color: var(#feffff);
     text-decoration: none;
     transition: var(--transition);
 }
