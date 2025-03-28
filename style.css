@@ -806,29 +806,32 @@ p {
 
 /* Marquee Section */
 .marquee {
-    background-color: var(--color-background); /* Adjust background color */
+    background-color: var(--color-background);
     overflow: hidden;
     white-space: nowrap;
     display: flex;
     align-items: center;
-    height: 100px; /* Adjust height as needed */
+    height: 80px;
     position: relative;
+    width: 100%;
 }
 
 .marquee-content {
     display: inline-flex;
-    animation: marquee 25s linear infinite; /* Adjust duration for speed */
+    animation: marquee 30s linear infinite;
     font-family: var(--font-primary);
-    font-size: 1.5rem; /* Adjust font size as needed */
+    font-size: 1.5rem;
     font-weight: bold;
-    color: var(#fcf300);
+    color: #FCF300; /* Fixed color value instead of var() */
     text-transform: uppercase;
-    gap: 50px; /* Adjust spacing between words */
+    gap: 50px;
+    will-change: transform;
+    min-width: 100%;
 }
 
 .marquee-content span {
     display: inline-block;
-    position: relative;
+    padding: 0 20px;
 }
 
 /* Add a sparkle or separator between words */
@@ -837,15 +840,20 @@ p {
     margin-left: 20px;
     margin-right: 20px;
     color: var(--color-secondary);
-    font-size: 1.2rem; /* Adjust size of the separator */
+    font-size: 1.2rem;
 }
 
 /* Marquee Animation */
 @keyframes marquee {
-    from {
-        transform: translateX(0);
+    0% {
+        transform: translateX(100%);
     }
-    to {
+    100% {
         transform: translateX(-100%);
     }
+}
+
+/* Dark mode color adjustment */
+.dark-mode .marquee-content {
+    color: #FCF300;
 }
