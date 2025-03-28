@@ -11,22 +11,27 @@
     --transition: all 0.3s ease-in-out;
     --animation-duration: 0.8s;
     --animation-ease: cubic-bezier(0.4, 0, 0.2, 1);
-    --font-primary: 'Inter', sans-serif;
-    --font-secondary: 'Poppins', sans-serif;
+    --font-primary: 'Space Grotesk', sans-serif;
+    --font-secondary: 'Plus Jakarta Sans', sans-serif;
+    --font-size-hero: clamp(2.5rem, 8vw, 4.5rem);
+    --font-size-heading: clamp(2rem, 5vw, 3rem);
+    --font-size-subheading: clamp(1.2rem, 3vw, 1.8rem);
+    --font-size-body: clamp(1rem, 2vw, 1.2rem);
+    --line-height-relaxed: 1.75;
     --mobile-padding: 16px;
     --mobile-spacing: 24px;
 }
 
 /* Dark Mode Variables */
 .dark-mode {
-    --color-primary: #1d3557;    /* Deep Blue */
-    --color-secondary: #457b9d;  /* Muted Blue */
-    --color-accent: #a8dadc;     /* Light Cyan */
-    --color-background: #1a202c; /* Dark Background */
-    --color-text: #e2e8f0;       /* Light Gray Text */
-    --color-heading: #f4f4f9;    /* Light Heading */
-    --color-card-bg: #7e7f80;    /* Dark Card Background */
-    --color-card-shadow: rgba(0, 0, 0, 0.5); /* Darker Shadow */
+    --color-primary: #3D405B;    /* Aureolin */
+    --color-secondary: #E9BCB7;  /* Tea rose (red) */
+    --color-accent: #C7EBF0;     /* Light cyan */
+    --color-background: #171D1C; /* Eerie black */
+    --color-text: #FFFFFF;       /* White */
+    --color-heading: #E9BCB7;    /* Tea rose (red) */
+    --color-card-bg: #1E2423;    /* Slightly lighter black for cards */
+    --color-card-shadow: rgba(0, 0, 0, 0.5); /* Darker shadow */
 }
 
 /* Global Reset */
@@ -502,6 +507,36 @@ a {
   color: var(--color-text);
 }
 
+/* Typography Styles */
+h1, .h1 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-hero);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+h2, .h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.subtitle {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-subheading);
+    font-weight: 400;
+    opacity: 0.9;
+    line-height: var(--line-height-relaxed);
+}
+
+p {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-relaxed);
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {
@@ -544,6 +579,42 @@ a {
         transform: translateY(0);
     }
 }
+
+/* Animation Utilities */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s var(--animation-ease) forwards;
+}
+
+.slide-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 1s var(--animation-ease) forwards;
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: scaleIn 1s var(--animation-ease) forwards;
+}
+
+@keyframes scaleIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Stagger Animations */
+.stagger > * {
+    opacity: 0;
+    animation: slideUp 0.8s var(--animation-ease) forwards;
+}
+
+.stagger > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger > *:nth-child(4) { animation-delay: 0.4s; }
 
 /* Mobile-First Responsive Design */
 :root {
@@ -713,5 +784,68 @@ a {
     .contact-link {
         width: 100%;
         max-width: 300px;
+    }
+}
+
+/* Hover Effects */
+.hover-lift {
+    transition: transform 0.3s var(--animation-ease);
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+.hover-glow {
+    transition: box-shadow 0.3s var(--animation-ease);
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.3);
+}
+
+/* Marquee Section */
+.marquee {
+    background-color: var(--color-background); /* Adjust background color */
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    height: 100px; /* Adjust height as needed */
+    position: relative;
+}
+
+.marquee-content {
+    display: inline-flex;
+    animation: marquee 25s linear infinite; /* Adjust duration for speed */
+    font-family: var(--font-primary);
+    font-size: 1.5rem; /* Adjust font size as needed */
+    font-weight: bold;
+    color: var(#fcf300);
+    text-transform: uppercase;
+    gap: 50px; /* Adjust spacing between words */
+}
+
+.marquee-content span {
+    display: inline-block;
+    position: relative;
+}
+
+/* Add a sparkle or separator between words */
+.marquee-content span::after {
+    content: "✦";
+    margin-left: 20px;
+    margin-right: 20px;
+    color: var(--color-secondary);
+    font-size: 1.2rem; /* Adjust size of the separator */
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
     }
 }
