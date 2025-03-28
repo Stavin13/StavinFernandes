@@ -86,7 +86,7 @@ nav {
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--color-primary);
+    color: #efefef;
     text-decoration: none;
 }
 
@@ -270,7 +270,7 @@ input:checked + .slider:before {
 
 .hero .primary-btn {
     background-color: var(--color-card-bg);
-    color: var(--color-primary);
+    color: #e5e6e5;
     box-shadow: 0 4px 6px var(--color-card-shadow);
 }
 
@@ -299,7 +299,7 @@ input:checked + .slider:before {
 .typing-intro {
     font-size: 1rem; /* Adjust font size */
     font-family: var(--font-secondary);
-    color: var(--color-primary); /* Remove space after var */
+    color: var#171d1c; /* Remove space after var */
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
