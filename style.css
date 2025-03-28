@@ -822,7 +822,7 @@ p {
     font-family: var(--font-primary);
     font-size: 1.5rem;
     font-weight: bold;
-    color: #FCF300; /* Fixed color value instead of var() */
+    color: #3454d1; /* Fixed color value instead of var() */
     text-transform: uppercase;
     gap: 30px; /* Reduced gap between items */
     will-change: transform;
